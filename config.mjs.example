@@ -1,0 +1,7 @@
+const config = {
+	element: ".search-form-row .input-group",
+	sites: [ "https://mysite.production.example.edu",
+                   "http://mysite.staging.example.edu" ]
+}
+
+export { config }
