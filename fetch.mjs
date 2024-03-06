@@ -26,8 +26,17 @@ async function extractComputedStyle(browser, site) {
     console.log("Fetching", site);
     await page.goto(site, { waitUntil: 'networkidle0'} );
     await page.addScriptTag({ content: `const computedStyle = ${computedStyle}` });
+   
+    if ( config.waitForFunction ) {
+        console.log("waiting for expression to become true ...");
+        await page.waitForFunction(config.waitForFunction);
+    } else if ( config.waitForSelector ) {
+        console.log("waiting for selector ...");
+        await page.waitForSelector(config.waitForSelector);
+    } 
 
     console.log("Evaluating computed style for", config.element);
+
     return await page.evaluate((compareSelector) => {
 	    return computedStyle(compareSelector);
     }, config.element);

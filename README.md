@@ -19,6 +19,18 @@ an element on the page in question. `sites` should be a two-element array using
 the URLs of a current site (e.g. production) and of a site where you are
 querying changes.
 
+### Waiting for elemments to be added to the page
+
+Add a `waitForSelector` selector to the configuration; the checker will wait
+until an element matching the selector has been added to the page; this will
+allow JavaScript that modifies the page after it's been loaded to run.
+
+Alternately, you can add `waitForFunction` which is a string containing a JS
+expression that must evaluate to `true` before the checker will evaluate the
+target element. This is more flexible and error-prone possibly than the 
+`waitForSelector`.  If both are present, then the function/expression will be
+used and `waitForSelector` value will be ignored.
+
 ## Building
 
 _After_ you have created (or updated) the `config.mjs` and/or the `fetch.mjs`
